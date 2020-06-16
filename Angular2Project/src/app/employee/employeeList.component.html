@@ -1,0 +1,57 @@
+﻿
+<div class="container">
+    <br />
+    <employee-count *ngIf="employees"
+                    [all]="totalEmployeeCount()"
+                    [male]="totalMaleEmployeeCount()"
+                    [female]="totalFemaleEmployeeCount()"
+                    (countRadioButtonSelectionChangedEvent)="onEmployeeCountRadioButtonChage($event)">
+
+    </employee-count>
+
+    <table class="table table-bordered table-striped tab-content table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Salary</th>
+                <th>birth Date</th>
+                <th>index</th>
+                <th>firs</th>
+                <th>last</th>
+                <th>even</th>
+                <th>odd</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let employee of employees;trackBy:trackByEmpCode;let i=index;let firstRow=first;let lastRow =last;let evenRow=even;let oddRow=odd;">
+                <tr *ngIf="selectedEmployeeCountRadionButton=='All' || employee.Gender==selectedEmployeeCountRadionButton">
+                    <td>
+                        <a [routerLink]="['/employees',employee.Code]">
+                            {{employee.Code | uppercase }}
+                        </a>
+                    </td>
+                    <td>{{employee.Name }}</td>
+                    <td>{{employee.Gender}}</td>
+                    <td>{{employee.AnualSalary |currency:'USD':true}}</td>
+                    <td>{{employee.DateOfBirth |date:'dd/MM/y'}}</td>
+                    <td>{{i}}</td>
+                    <td>{{firstRow}}</td>
+                    <td>{{lastRow}}</td>
+                    <td>{{evenRow}}</td>
+                    <td>{{oddRow}}</td>
+                </tr>
+            </ng-container>
+            <tr *ngIf="!employees || employees.length===0">
+                <td colspan="10" style="color:dodgerblue;font-weight:bold;font-size:large;">{{statusMessage}}</td>
+            </tr>
+            <tr *ngIf="!employees && employees.length===0">
+                <td colspan="10">No data found in this list</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <button class="btn btn-primary" (click)="getEmployees()">Refresh Employee</button>
+
+</div>

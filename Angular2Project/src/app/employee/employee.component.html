@@ -1,0 +1,41 @@
+﻿<br /><br />
+<div class="container">
+    <table *ngIf="employee" class="table table-bordered table-condensed tab-content table-hover table-responsive table-striped">
+        <thead>
+            <tr>
+                <th class="text-center" colspan="2">Employee Details</th>
+
+            </tr>
+        </thead>
+        <tr>
+            <td>Name</td>
+            <td>{{employee.Name}}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{employee.Gender}}</td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td>{{employee.AnualSalary}}</td>
+        </tr>
+        <tr>
+            <td>Date Of Birth</td>
+            <td>{{employee.DateOfBirth}}</td>
+        </tr>
+    </table>
+    <div *ngIf="!employee">
+        {{statusMessage}}
+    </div>
+    <br />
+    <!--<button (click)="taggleDetails()">
+        {{showDetails ?'hide':'show'}} details
+    </button>-->
+    <div>
+        <input type="button" (click) ="backButtonClick()" value="Back to employees" class="btn btn-primary" />
+    </div>
+</div>
+<br />
+<div *ngIf="!subscription.closed">
+    <input type="button" (click)="onCancelButtonClick()" value="Cancel Request" class="btn btn-primary" />
+</div>
